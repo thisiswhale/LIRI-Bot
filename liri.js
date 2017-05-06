@@ -1,6 +1,11 @@
 //grabs arguments from command line and calls the switch and case function
 var action = process.argv[2];
 var submit = process.argv.slice(3).join(" ");
+
+    var fs = require("fs");
+fs.appendFile("log.txt", process.argv.slice(2).join(" ")+",\r\n");
+
+
 choices();
 
 function choices() {
@@ -104,7 +109,7 @@ function imdb() {
 //reconfigure action and submit equals with variables from random.txt
 function readTxt() {
 
-    var fs = require("fs");
+
     fs.readFile("random.txt", "utf8", function(error, data) {
         var dataArr = data.split(" ");
         action = dataArr[0];
