@@ -64,7 +64,7 @@ function spotify() {
             console.log('Error occurred: ' + err);
             return;
         }
-
+console.log('spotify data', data)
         // check if album_type is "album" data.tracks.items[0].album.album_type
 
         for (var i = 0; i < data.tracks.items.length; i++) {
