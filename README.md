@@ -10,7 +10,7 @@
 
    * This will show your last 20 tweets and when they were created at in your terminal/bash window.
 
-2. `node liri.js spotify-this-song '<song name here>'` **DEPRECATED**
+2. `node liri.js spotify-this-song '<song name here>'` **DEPRECATED :(**
 
    * This will show the following information about the song in your terminal/bash window
      * Artist(s)
@@ -45,8 +45,6 @@
      * It should run `spotify-this-song` for "I Want it That Way," as follows the text in `random.txt`.
      * Feel free to change the text in that document to test out the feature for other commands.
 
-
-<p align="center"><img width="700" height="450" src="https://user-images.githubusercontent.com/16066443/39556554-011794c6-4e36-11e8-9530-779a233a3e09.gif"></p>
 
 #### Built with
   - JavaScript
