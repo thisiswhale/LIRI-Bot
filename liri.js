@@ -2,8 +2,11 @@
 var action = process.argv[2];
 var submit = process.argv.slice(3).join(" ");
 
-    var fs = require("fs");
-fs.appendFile("log.txt", process.argv.slice(2).join(" ")+",\r\n");
+var fs = require("fs");
+fs.appendFile("log.txt", process.argv.slice(2).join(" ")+",\r\n", (err) => {
+  if (err) throw err;
+  console.log('The command "'+action +' ' +submit+'" was appended to log.txt!');
+});
 
 
 choices();
@@ -15,7 +18,6 @@ function choices() {
             twitter();
             break;
 
-            //"https://api.spotify.com/v1/search?query=hello&type=track&offset=0&limit=20"
         case "spotify-this-song":
             spotify();
             break;
@@ -27,7 +29,6 @@ function choices() {
         case "do-what-it-says":
             readTxt();
             break;
-
     }
 }
 //twitter call tweets out me recent 20 tweets
@@ -87,7 +88,12 @@ function imdb() {
     if (submit == null || submit === "") {
         submit = "Mr. Nobody";
     }
-    request("http://www.omdbapi.com/?t=" + submit + "&y=&plot=short&r=json", function(error, response, body) {
+
+    request("http://www.omdbapi.com/?t=" + submit + "&apikey=6cd684a5&y=&plot=short&r=json", function(error, response, body) {
+        if (error) {
+            console.log('Error occurred: ' + err);
+            return;
+        }
 
         // If the request is successful (i.e. if the response status code is 200)
         if (!error && response.statusCode === 200) {
@@ -109,8 +115,10 @@ function imdb() {
 //reconfigure action and submit equals with variables from random.txt
 function readTxt() {
 
-
     fs.readFile("random.txt", "utf8", function(error, data) {
+        if (error){
+          throw err;
+        }
         var dataArr = data.split(" ");
         action = dataArr[0];
         submit = dataArr.slice(1).join(" ");
@@ -118,9 +126,3 @@ function readTxt() {
         choices();
     });
 }
-
-// * In addition to logging the data to your terminal/bash window, output the data to a .txt file called `log.txt`.
-
-// * Make sure you append each command you run to the `log.txt` file. 
-
-// * Do not overwrite your file each time you run a command.
